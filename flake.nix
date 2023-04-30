@@ -37,61 +37,63 @@
         };
 
         defaultPackage = packages.cohost-blogger;
+  }) // {
+    nixosModules = {
+      cohost-blogger = { config, lib, pkgs, ... }:
+      with lib;
+      let
+        cfg = config.services.cohost-blogger;
+      in {
+        options.services.cohost-blogger = {
+          enable = mkEnableOption "Enables the cohost-blogger server";
 
-        nixosModule = { config, lib, pkgs, ... }:
-        with lib;
-        let
-          cfg = config.services.cohost-blogger;
-        in {
-          options.services.cohost-blogger = {
-            enable = mkEnableOption "Enables the cohost-blogger server";
+          domain = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+            description = "Which domain to host the server under; if disabled, NGINX is not used";
+          };
+          port = mkOption {
+            type = types.port;
+            default = 3500;
+          };
+          package = mkOption {
+            type = types.package;
+            default = self.defaultPackage.${pkgs.system};
+          };
+        };
 
-            domain = mkOption {
-              type = types.nullOr types.str;
-              default = null;
-              description = "Which domain to host the server under; if disabled, NGINX is not used";
+        config = mkIf cfg.enable {
+          systemd.services."cohost-blogger" = {
+            wantedBy = [ "multi-user.target" ];
+
+            environment = {
+              PORT = toString cfg.port;
             };
-            port = mkOption {
-              type = types.port;
-              default = 3500;
-            };
-            package = mkOption {
-              type = types.package;
-              default = self.packages.${system}.default;
+
+            serviceConfig = {
+              Restart = "on-failure";
+              ExecStart = "${getExe cfg.package}";
+              DynamicUser = "yes";
+              RuntimeDirectory = "cohost-blogger";
+              RuntimeDirectoryMode = "0755";
+              StateDirectory = "cohost-blogger";
+              StateDirectoryMode = "0700";
+              CacheDirectory = "cohost-blogger";
+              CacheDirectoryMode = "0750";
             };
           };
 
-          config = mkIf cfg.enable {
-            systemd.services."cohost-blogger" = {
-              wantedBy = [ "multi-user.target" ];
-
-              environment = {
-                PORT = cfg.port;
-              };
-
-              serviceConfig = {
-                Restart = "on-failure";
-                ExecStart = "${getExe cfg.package}";
-                DynamicUser = "yes";
-                RuntimeDirectory = "cohost-blogger";
-                RuntimeDirectoryMode = "0755";
-                StateDirectory = "cohost-blogger";
-                StateDirectoryMode = "0700";
-                CacheDirectory = "cohost-blogger";
-                CacheDirectoryMode = "0750";
-              };
-            };
-
-            services.nginx = mkIf cfg.domain {
-              virtualHosts."${cfg.domain}" = {
-                enableACME = true;
-                forceSSL = true;
-                locations."/" = {
-                  proxyPass = "http://127.0.0.1:${cfg.port}/";
-                };
+          services.nginx = mkIf (cfg.domain != null) {
+            virtualHosts."${cfg.domain}" = {
+              enableACME = true;
+              forceSSL = true;
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${toString cfg.port}/";
               };
             };
           };
         };
-  });
+      };
+    };
+  };
 }
