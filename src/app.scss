@@ -1,0 +1,105 @@
+@use "sass:color";
+
+$accent-color: #c177af;
+
+:root {
+  line-height: 1.5;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-rendering: optimizeLegibility;
+
+  --text-color: #111;
+  --text-color-light: #444;
+  --background-color: #eee;
+  --card-overlay: rgba(255, 255, 255, 0.6);
+  --line-color: rgba(0, 0, 0, 0.2);
+
+  --accent-color: #{$accent-color};
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --text-color: #fff;
+    --text-color-light: #aaa;
+    --background-color: #111;
+    --card-overlay: rgba(25, 25, 25, 0.6);
+    --line-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  accent-color: var(--accent-color);
+}
+
+a {
+  color: var(--accent-color);
+}
+
+::selection {
+  background-color: var(--accent-color);
+  color: #111;
+}
+
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, figure {
+  margin: 0;
+}
+
+hr {
+  color: var(--line-color);
+}
+
+img {
+  display: block;
+}
+
+pre, code {
+  font-family: monospace;
+}
+pre code {
+  white-space: pre-wrap;
+  width: 100%;
+  overflow: auto;
+  font-size: 0.8em !important;
+}
+
+blockquote {
+  font-weight: 500;
+  font-style: italic;
+  border-left: 0.25rem var(--line-color) solid;
+  quotes: "\201C""\201D""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-left: 1em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.post {
+  isolation: isolate;
+  position: relative;
+  max-width: 800px;
+  word-break: break-word;
+
+  &.preview {
+    max-height: 40vh;
+    overflow: hidden;
+    * {
+      pointer-events: none;
+    }
+  }
+
+  figcaption {
+    color: var(--text-color-light) !important;
+  }
+}
+
+.link-wrapper, .link-wrapper:hover {
+  color: unset;
+  text-decoration: unset;
+}
