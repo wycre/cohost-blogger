@@ -88,7 +88,7 @@ declare global {
     pinned: boolean,
     commentsLocked: boolean,
     sharesLocked: boolean,
-		blocks: StorageBlock[], // TODO
+		blocks: StorageBlock[],
 		plainTextBody: string,
     postingProject: Project;
     shareTree: unknown[]; // TODO

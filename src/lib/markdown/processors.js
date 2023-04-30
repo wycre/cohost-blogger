@@ -85,7 +85,8 @@ export function makeLazyEmbeds(hast) {
           src: node.properties?.href,
           autoplay: 'true',
           playsinline: 'true',
-          loop: 'true',
+          // todo: what the hell
+          loop: node.properties?.href.includes('autoplay=false') ? 'false' : 'true',
           style: 'width: 100%;max-width: 600px',
           controls: 'true'
         },
