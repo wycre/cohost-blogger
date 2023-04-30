@@ -75,8 +75,8 @@ export async function fetchAllPosts(page = 0) {
  * @returns {Promise<Post[]>}
  */
 async function getPostsUncached() {
-  //return await fetchAllPosts();
-  return JSON.parse(await fs.readFile('src/testPosts.json', 'utf8')).filter(post => post.tags.includes('cohost-blogger'));
+  return await fetchAllPosts();
+  //return JSON.parse(await fs.readFile('src/testPosts.json', 'utf8')).filter(post => post.tags.includes('cohost-blogger'));
 }
 
 // this technically only stores the preview data - the posts on the actual pages are always fetched
