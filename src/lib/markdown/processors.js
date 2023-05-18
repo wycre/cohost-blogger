@@ -90,12 +90,12 @@ export function makeLazyEmbeds(hast) {
         tagName: 'video',
         properties: {
           src: url.href,
-          autoplay: 'true',
-          playsinline: 'true',
           // since we're not able to get external metadata, and we don't want to
           // make _all_ videos autoplay, we have to scan the searchParams for
           // autoplay=false. this sucks! it's the best we can do
-          loop: (url.searchParams.get('autoplay') !== 'false').toString(),
+          autoplay: (url.searchParams.get('autoplay') !== 'false') ? 'true' : undefined,
+          loop: 'true',
+          playsinline: 'true',
           style: 'width:100%;max-width:600px',
           controls: 'true'
         },
