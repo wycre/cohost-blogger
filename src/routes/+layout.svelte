@@ -30,20 +30,33 @@
     max-width: 1200px;
     width: 100%;
   }
+
+  .content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .location.errored {
+    color: #e95678;
+  }
 </style>
 
-<header>
-  <CommandLine>
-    cd {(new URL($page.url)).pathname}
-  </CommandLine>
-</header>
+<div class="content">
+  <header>
+    <CommandLine>
+      cd <span class="location" class:errored={$page.error !== null}>{(new URL($page.url)).pathname}</span>
+    </CommandLine>
+  </header>
 
-<slot/>
+  <slot/>
 
-<footer>
-  <div class="inner">
-    <a href="https://cohost.org/{config.handle}/tagged/{config.tag}" target="_blank" rel="noopener noreferrer">view on cohost</a>
-    &middot;
-    <a href={constants.repo} target="_blank" rel="noopener noreferrer">powered by {constants.name}</a>
-  </div>
-</footer>
+  <footer>
+    <div class="inner">
+      <a href="https://cohost.org/{config.handle}/tagged/{config.tag}" target="_blank" rel="noopener noreferrer">view on cohost</a>
+      &middot;
+      <a href={constants.repo} target="_blank" rel="noopener noreferrer">powered by {constants.name}</a>
+    </div>
+  </footer>
+</div>
