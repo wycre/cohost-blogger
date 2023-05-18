@@ -18,7 +18,7 @@
             pname = "cohost-blogger";
             inherit (package) version;
 
-            npmDepsHash = "sha256-pcw+b+IFUG6w07sJ/UN0cPZfvL3oBrSqQBiVhMGquDU=";
+            npmDepsHash = "sha256-hzn0sjxcysxe++IPyhKE/syx3S1Nh2hKGcjvS6UaLvY=";
 
             doCheck = true;
 
