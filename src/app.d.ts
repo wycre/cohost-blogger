@@ -8,26 +8,6 @@ declare global {
 		// interface Platform {}
 	}
 
-	type ASTMap = RootAST | ElementAST | TextAST
-
-	interface RootAST {
-		type: 'root',
-		position?: any,
-		children: ASTMap[]
-	}
-	interface ElementAST {
-		type: 'element',
-		position?: any,
-		children: ASTMap[],
-		properties: Record<string, any>,
-		tagName: string
-	}
-	interface TextAST {
-		type: 'text',
-		position?: any,
-		value: string
-	}
-
 	interface MarkdownStorageBlock {
     type: 'markdown',
     markdown: {

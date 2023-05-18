@@ -2,7 +2,7 @@ import { visit } from 'unist-util-visit';
 import videoExtensions from 'video-extensions-list';
 
 /**
- * @param {RootAST} hast
+ * @param {import('hast').Root} hast
  */
 export function copyImgAltToTitle(hast) {
   visit(hast, { type: 'element', tagName: 'img' }, (node) => {
@@ -13,24 +13,24 @@ export function copyImgAltToTitle(hast) {
 }
 
 /**
- * @param {RootAST} hast
+ * @param {import('hast').Root} hast
  */
 export function lazyLoadImages(hast) {
   visit(hast, { type: 'element', tagName: 'img' }, (node) => {
-    node.properties.loading = 'lazy';
+    if (node.properties) node.properties.loading = 'lazy';
   });
 }
 
 
 /**
- * @param {RootAST} hast
+ * @param {import('hast').Root} hast
  */
 export function dropCohostBloggerIgnoreBlocks(hast) {
   visit(hast, { type: 'element' }, (node, index, parent) => {
     if (parent === null || index === null) return;
 
     // remove any elements that match the class
-    if (node.properties.className && node.properties.className.includes('cohost-blogger-ignore')) {
+    if (node.properties?.className && node.properties.className.includes('cohost-blogger-ignore')) {
       parent.children.splice(index, 1);
 
       // if there's nothing else in the parent, then remove it aswell
@@ -46,7 +46,7 @@ export function dropCohostBloggerIgnoreBlocks(hast) {
 
 // largely copied from makeIframelyEmbeds
 /**
- * @param {RootAST} hast
+ * @param {import('hast').Root} hast
  */
 export function makeLazyEmbeds(hast) {
   visit(hast, { type: 'element', tagName: 'a' }, (node, index, parent) => {
@@ -69,8 +69,11 @@ export function makeLazyEmbeds(hast) {
     // additionally, GFM autolink literals in their own paragraph are the
     // only child of their parent node.
     if (parent.children.length != 1) return;
+    
+    // links with no href should be ignored
+    if (!node.properties?.href) return;
 
-    const url = new URL(node.properties.href);
+    const url = new URL(node.properties.href.toString());
 
     // plain videos
     const ext = (url.pathname || '').split('.').pop();
@@ -78,6 +81,7 @@ export function makeLazyEmbeds(hast) {
       // render the parent element to fit the video better
       if (parent.type === 'element') {
         parent.tagName = 'div';
+        // @ts-ignore
         parent.properties.style = 'width:100%;display:flex;justify-content:center'
       }
 
