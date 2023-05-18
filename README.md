@@ -34,7 +34,7 @@ PORT=1234 node build
 
 ## Configuration
 
-Currently, there isn't a proper configuration system - this is not yet made to be hosted by anyone by me. You can head into [`src/lib/config.js`](https://git.oat.zone/oat/cohost-blogger/src/branch/main/src/lib/config.js) for all instance-specific configuration, but this will be expanded into a proper system eventually:tm:.
+Currently, there isn't a proper configuration system - this is not yet made to be hosted by anyone by me. You can head into [`src/lib/config.js`](./src/lib/config.js) for all instance-specific configuration, but this will be expanded into a proper system eventually:tm:.
 
 ## Writing notes
 
@@ -111,4 +111,4 @@ Each time you add, remove or otherwise modify an NPM dependency, you **must** up
 ## Attributions
 
 - **[@mintexists](https://cohost.org/mintexists)**, for help reverse-engineering the Cohost API
-- **[Cohost's devteam](https://cohost.org/staff)** - while this site does interact _with_ Cohost, lots of the [Markdown processing code](https://git.oat.zone/oat/cohost-blogger/src/branch/main/src/lib/markdown) is borrowed from their sourcemaps
+- **[Cohost's devteam](https://cohost.org/staff)** - while this site does interact _with_ Cohost, lots of the [Markdown processing code](./src/lib/markdown) is borrowed from their sourcemaps
