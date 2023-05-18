@@ -1,4 +1,5 @@
-import { visit } from "unist-util-visit";
+import { visit } from 'unist-util-visit';
+import videoExtensions from 'video-extensions-list';
 
 /**
  * @param {RootAST} hast
@@ -69,9 +70,11 @@ export function makeLazyEmbeds(hast) {
     // only child of their parent node.
     if (parent.children.length != 1) return;
 
+    const url = new URL(node.properties.href);
+
     // plain videos
-    // todo: THIS IS LAZY!!!!
-    if (node.properties?.href.endsWith('.mp4') || node.properties?.href.endsWith('.webm')) {
+    const ext = (url.pathname || '').split('.').pop();
+    if (ext && videoExtensions.includes(ext)) {
       // render the parent element to fit the video better
       if (parent.type === 'element') {
         parent.tagName = 'div';
@@ -82,24 +85,26 @@ export function makeLazyEmbeds(hast) {
         type: 'element',
         tagName: 'video',
         properties: {
-          src: node.properties?.href,
+          src: url.href,
           autoplay: 'true',
           playsinline: 'true',
-          // todo: what the hell
-          loop: node.properties?.href.includes('autoplay=false') ? 'false' : 'true',
-          style: 'width: 100%;max-width: 600px',
+          // since we're not able to get external metadata, and we don't want to
+          // make _all_ videos autoplay, we have to scan the searchParams for
+          // autoplay=false. this sucks! it's the best we can do
+          loop: (url.searchParams.get('autoplay') !== 'false').toString(),
+          style: 'width:100%;max-width:600px',
           controls: 'true'
         },
         children: [],
       });
     // youtube videos
-    } else if (node.properties?.href.startsWith('https://www.youtube.com/')) {
+    } else if (url.hostname === 'www.youtube.com') {
       // <iframe src="https://www.youtube.com/embed/avNF21NRe10?feature=oembed" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" title="[NotITG Release] eyes in the water" name="fitvid0" frameborder="0"></iframe>
       parent.children.splice(index, 1, {
         type: 'element',
         tagName: 'iframe',
         properties: {
-          src: node.properties?.href.replace('/watch?v=', '/embed/'),
+          src: url.href.replace('/watch?v=', '/embed/'),
           allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
           frameborder: 0,
           style: 'width:100%;aspect-ratio:16/9',

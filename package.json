@@ -12,8 +12,8 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "^1.2.4",
-		"@types/marked": "^4.0.8",
 		"@sveltejs/kit": "^1.5.0",
+		"@types/marked": "^4.0.8",
 		"eslint": "^8.28.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"svelte": "^3.54.0",
@@ -43,6 +43,7 @@
 		"stringify-entities": "^4.0.3",
 		"timeago.js": "^4.0.2",
 		"unified": "^10.1.2",
-		"unist-util-visit": "^4.1.2"
+		"unist-util-visit": "^4.1.2",
+		"video-extensions-list": "^1.0.4"
 	}
 }
