@@ -140,7 +140,7 @@
       </a>
     </div>
     <div class="comment-text">
-      {@html renderCommentMarkdown(data.comment.body)}
+      {@html renderCommentMarkdown(data.comment.body, new Date(data.comment.postedAtISO))}
     </div>
   </div>
 </article>

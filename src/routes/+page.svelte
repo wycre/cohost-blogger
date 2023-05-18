@@ -206,7 +206,7 @@
           <header>
             <h2 class="title">{post.headline}</h2>
             <div class="post preview excerpt prose">
-              {@html renderPostSummaryMarkdown(post.blocks)}
+              {@html renderPostSummaryMarkdown(post.blocks, post.publishedAt ? new Date(post.publishedAt) : undefined)}
             </div>
           </header>
         </a>

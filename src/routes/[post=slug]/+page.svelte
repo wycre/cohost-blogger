@@ -33,7 +33,7 @@
 
   // metadata
   const canonicalURL = `${config.siteURL}/${getPostSlug(post)}/`;
-  const summary = renderPostSummaryPlaintext(post.blocks);
+  const summary = renderPostSummaryPlaintext(post.blocks, post.publishedAt ? new Date(post.publishedAt) : undefined);
   const image = getPostImages(post)[0];
 </script>
 
@@ -128,7 +128,7 @@
       </div>
     {/if}
     <div class="post">
-      {@html renderPostMarkdown(post.plainTextBody)}
+      {@html renderPostMarkdown(post.plainTextBody, false, post.publishedAt ? new Date(post.publishedAt) : undefined)}
     </div>
   </div>
 

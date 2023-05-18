@@ -31,7 +31,7 @@ const xml = (/** @type {Post[]} */ posts) => minifyXML(`
       .map(post => `
         <item>
           <title>${post.headline}</title>
-          <description>${renderPostSummaryPlaintext(post.blocks)}</description>
+          <description>${renderPostSummaryPlaintext(post.blocks, post.publishedAt ? new Date(post.publishedAt) : undefined)}</description>
           <link>${config.siteURL}/${getPostSlug(post)}/</link>
           <dc:creator>${post.postingProject.displayName}</dc:creator>
           <pubDate>${getPostPublishDate(post)?.toUTCString()}</pubDate>
@@ -39,7 +39,7 @@ const xml = (/** @type {Post[]} */ posts) => minifyXML(`
             `<content url="${getPostImages(post)[0].fileURL}" medium="image" />`
           : ''}
           <content:encoded><![CDATA[
-            ${renderPostMarkdown(post.plainTextBody, true)}
+            ${renderPostMarkdown(post.plainTextBody, true, post.publishedAt ? new Date(post.publishedAt) : undefined)}
           ]]></content:encoded>
         </item>
       `)}
