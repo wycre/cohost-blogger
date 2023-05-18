@@ -97,6 +97,7 @@
         :global(img) {
           margin-top: 2em;
           margin-bottom: 2em;
+          max-width: 100%;
         }
       }
     }

@@ -82,11 +82,15 @@
       }
 
       mask-size: contain;
+      -webkit-mask-size: contain;
       mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
       mask-position: center;
+      -webkit-mask-position: center;
 
       &.mask-squircle {
         mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAwIDBDMjAgMCAwIDIwIDAgMTAwczIwIDEwMCAxMDAgMTAwIDEwMC0yMCAxMDAtMTAwUzE4MCAwIDEwMCAweiIvPjwvc3ZnPg==);
+        -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAwIDBDMjAgMCAwIDIwIDAgMTAwczIwIDEwMCAxMDAgMTAwIDEwMC0yMCAxMDAtMTAwUzE4MCAwIDEwMCAweiIvPjwvc3ZnPg==);
       }
 
       &.mask-roundrect {
@@ -101,14 +105,17 @@
 
       &.mask-egg {
         mask-image: url('/masks/egg.svg');
+        -webkit-mask-image: url('/masks/egg.svg');
       }
 
       &.mask-capsule-big {
         mask-image: url('/masks/capsule-big.svg');
+        -webkit-mask-image: url('/masks/capsule-big.svg');
       }
 
       &.mask-capsule-small {
         mask-image: url('/masks/capsule-small.svg');
+        -webkit-mask-image: url('/masks/capsule-small.svg');
       }
     }
   }
