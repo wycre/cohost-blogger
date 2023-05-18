@@ -1,6 +1,6 @@
 <script>
   import Comment from '$lib/Comment.svelte';
-  import { getPostImages, getPostPublishDate, getPostSlug, renderASTMap } from '$lib/cohost';
+  import { getPostImages, getPostPublishDate, getPostSlug } from '$lib/cohost';
   import { renderPostMarkdown, renderPostSummaryPlaintext } from '$lib/markdown/rendering';
   import { formatDate } from '$lib/utils';
   import * as timeago from 'timeago.js';

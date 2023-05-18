@@ -1,41 +1,5 @@
-import { stringifyEntities } from 'stringify-entities';
 import * as fs from 'fs/promises';
 import config from '$lib/config';
-
-/**
- * @param {Record<string, any>} properties
- */
-function renderProperties(properties) {
-  if (Object.keys(properties).length === 0) return '';
-  return ' ' + Object.entries(properties)
-    .filter(([k, v]) => k !== '' && v !== '')
-    .map(([k, v]) =>
-      v ? `${k}=${typeof v === 'string' ? `"${stringifyEntities(v)}"` : v.toString()}` : k
-    ).join(' ');
-}
-
-/**
- * @param {ASTMap} ast
- * @returns {string}
- */
-// todo: obliterate from orbit
-export function renderASTMap(ast) {
-  switch (ast.type) {
-    case 'root':
-      return ast.children.map(c => renderASTMap(c)).join('')
-    case 'element':
-      if (ast.tagName === 'a') {
-        ast.properties.target = '_blank';
-        ast.properties.rel = 'noreferrer noopener';
-      }
-      if (ast.properties.id && ast.properties.id.includes('cohost-blogger-ignore')) return '';
-      return `<${ast.tagName}${renderProperties(ast.properties)}>${ast.children.map(c => renderASTMap(c)).join('')}</${ast.tagName}>`;
-    case 'text':
-      return stringifyEntities(ast.value);
-    default:
-      return '';
-  }
-}
 
 const COHOST_API_URI = 'https://cohost.org/api/v1/trpc/';
 /**
