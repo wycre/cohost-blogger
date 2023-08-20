@@ -61,6 +61,9 @@
 
     word-break: break-word;
 
+    transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+
     .image {
       display: block;
       margin-bottom: 1.25em;
@@ -124,8 +127,13 @@
 
     &:hover {
       header {
-        opacity: 0.8;
+        opacity: 0.85;
       }
+      transform: scale(1.01);
+    }
+    &:active {
+      transition-duration: 0.08s;
+      transform: scale(0.99);
     }
   }
 
