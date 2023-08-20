@@ -58,8 +58,14 @@ const CACHE_INVALID_PERIOD = 60 * 1000;
 export async function getPosts() {
   const timeSinceCache = Date.now() - postCache.refreshed;
   if (timeSinceCache > CACHE_INVALID_PERIOD) {
-    postCache.posts = await getPostsUncached();
-    postCache.refreshed = Date.now();
+    try {
+      postCache.posts = await getPostsUncached();
+      postCache.refreshed = Date.now();
+    } catch(err) {
+      console.error('error while loading posts:');
+      console.error(err);
+      return postCache.posts;
+    }
   }
 
   return postCache.posts;
