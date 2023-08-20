@@ -139,6 +139,7 @@
     height: 460px;
     max-height: 60vw;
     position: relative;
+    overflow: hidden;
 
     background:
       linear-gradient(to bottom, rgba(0,0,0,0), 85%, var(--background-color)),
@@ -155,6 +156,7 @@
 
       img {
         animation: 2s infinite ease-in-out alternate light-bob;
+        max-width: 85vw;
       }
     }
   }
