@@ -179,7 +179,7 @@ b.white {
 
 <div class="command commandline">
   <span>
-    <!-- The following line determines the text in the command line in the header -->
+    <!-- UPDATEME The following line determines the text in the command line in the header -->
     <a href="/" class="silentlink">{config.subDomain}.</a><a href="{config.rootURL}" class="silentlink">{config.rootDomain}</a>
   </span>
   <div class="green commandsymbol">λ</div>

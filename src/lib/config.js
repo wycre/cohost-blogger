@@ -1,4 +1,4 @@
-export default {
+export default { // UPDATEME
   // Basic site details
   handle: 'wycre',                                  // This must match your cohost handle
   tag: 'cohost-blogger',                            // Tag your chosts with this for cohost-blogger to read it
