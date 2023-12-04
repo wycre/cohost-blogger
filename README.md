@@ -1,12 +1,13 @@
 # cohost-blogger
 
-A self-hostable front-end for [Cohost](https://cohost.org/) mimicing a CMS.
+A self-hostable front-end for [Cohost](https://cohost.org/) mimicking a CMS.
 
 ## What?
 
 CMSes are stupid to host, stupid to make and stupid to find. Why bother? We have a perfectly fine Cohost. Let's use that!
 
-This site, pointed at a Cohost user and tag, will find every post under that tag and display it in a nice way, including the comments and proper rendering of the contents themselves.
+This site, pointed at a Cohost user and tag, will find every post under that tag and display it in a nice way, including 
+the comments and proper rendering of the contents themselves.
 
 ## How?
 
@@ -15,26 +16,45 @@ _If you're on NixOS, you should be able to integrate it into your [system config
 First, install the dependencies:
 
 ```sh
-git clone https://git.oat.zone/oat/cohost-blogger && cd cohost-blogger
+git clone https://github.com/wycre/cohost-blogger.git && cd cohost-blogger
 npm install
 ```
 
 Afterwards, for development, you can run:
 
-```
+```sh
 npm run dev
 ```
 
 Or, for deployment:
 
-```
+For running natively:
+```sh
 npm run build
-PORT=1234 node build
+export PORT=1234 # pick your port 
+node build
+```
+
+For running in Docker:
+```sh
+docker build -t cohost-blog .
+docker run --name cohost-blogger -p 3001:3000 -d cohost-blog
 ```
 
 ## Configuration
 
-Currently, there isn't a proper configuration system - this is not yet made to be hosted by anyone by me. You can head into [`src/lib/config.js`](./src/lib/config.js) for all instance-specific configuration, but this will be expanded into a proper system eventually:tm:.
+Currently, this still requires some web skills to configure. 
+
+### Instance-specific config
+You can head into [`src/lib/config.js`](./src/lib/config.js) for all instance-specific configuration,
+this relates to your URL and cohost tag, etc.
+
+This fork of the cohost-blogger has replaced several elements with generic versions, as well as placing comments that 
+will help in finding areas to change.
+
+Perform a search of this repo for the string `UPDATEME` to find all areas that you should change.
+
+Additionally, the default homepage includes some tips on where to go to configure your page
 
 ## Writing notes
 
@@ -68,7 +88,7 @@ published-at: 2023-01-24
 -->
 ```
 
-It may be inserted at any point in the post, as long as it is _a seperate block_ - prepended and appended with 2 newlines.
+It may be inserted at any point in the post, as long as it is _a separate block_ - prepended and appended with 2 newlines.
 
 Currently, only `slug` and `published-at` are valid keys, however more may be added in the future. `slug` specifies the URL, while `published-at` overrides the publication date for reuploaded posts.
 
@@ -110,5 +130,6 @@ Each time you add, remove or otherwise modify an NPM dependency, you **must** up
 
 ## Attributions
 
+- **[oatmealine](https://oat.zone/)**, for creating this entire thing to begin with
 - **[@mintexists](https://cohost.org/mintexists)**, for help reverse-engineering the Cohost API
 - **[Cohost's devteam](https://cohost.org/staff)** - while this site does interact _with_ Cohost, lots of the [Markdown processing code](./src/lib/markdown) is borrowed from their sourcemaps
