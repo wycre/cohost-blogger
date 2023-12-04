@@ -1,4 +1,7 @@
 <!-- svelte-ignore css-unused-selector -->
+<script>
+import config from '$lib/config';
+</script>
 
 <style lang="scss">
 @font-face {
@@ -176,7 +179,8 @@ b.white {
 
 <div class="command commandline">
   <span>
-    <a href="/" class="silentlink">blog.</a><a href="https://oat.zone/" class="silentlink">oat.zone</a>
+    <!-- The following line determines the text in the command line in the header -->
+    <a href="/" class="silentlink">{config.subDomain}.</a><a href="{config.rootURL}" class="silentlink">{config.rootDomain}</a>
   </span>
   <div class="green commandsymbol">λ</div>
   <span><slot/></span>
