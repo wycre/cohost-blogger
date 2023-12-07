@@ -37,8 +37,9 @@ node build
 
 For running in Docker:
 ```sh
-docker build -t cohost-blog .
-docker run --name cohost-blogger -p 3001:3000 -d cohost-blog
+npm run build
+docker build -t cohost-blogger .
+docker run --name cohost-blogger -p 3001:3000 -d cohost-blogger
 ```
 
 ## Configuration
