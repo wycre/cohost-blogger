@@ -3,7 +3,7 @@ export default { // UPDATEME
   handle: 'wycre',                                  // This must match your cohost handle
   tag: 'cohost-blogger',                            // Tag your chosts with this for cohost-blogger to read it
   blogName: 'Wycre\'s blog',                        // This will be displayed as the title for the tab
-  blogDescription: 'Archival and Awful Websites',
+  blogDescription: 'Archival and Silly Websites',
   siteURL: 'https://blog.wycre.net',                // This is the URL of the site hosting cohost-blogger
 
   // CommandLine header details
