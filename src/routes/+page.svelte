@@ -187,29 +187,8 @@
 
 <div class="inner">
   <div class="summary prose">
-    <!-- UPDATEME Place the HTML for your summary here -->
-    <p>
-      <b>Hi!</b> Welcome to cohost-blogger.
-    </p>
-    <p>
-      This page will show any posts on the <code>{config.handle}</code> cohost blog with the tag <code>{config.tag}</code>.
-    </p>
-    <h2>Setup guide</h2>
-    <p>
-      To get started using cohost-blogger, follow these steps.
-    </p>
-    <ol>
-      <li>Update the values in <code>src/lib/config.js</code></li>
-      <li>Change this description in <code>src/routes/+page.svelte</code></li>
-      <li>The header and footer are located in <code>src/routes/+layout.svelte</code></li>
-      <li>If you desire to change the pages for each post, that can be found in <code>src/routes/[post=slug]/+page.svelte</code></li>
-    </ol>
-    <p>
-      When you're done with your changes, run <code>npm run build</code> then <code>node build</code>
-      This will run the server on port 3000 by default, change this by setting the environment variable <code>PORT</code>
-      <br>
-      Alternatively you can use the provided Dockerfile to create a docker image of this app.
-    </p>
+    {@html config.longDescription}
+
   </div>
 
   <div class="posts">
