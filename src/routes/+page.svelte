@@ -187,15 +187,7 @@
 
 <div class="inner">
   <div class="summary prose">
-    <!-- UPDATEME Place the HTML for your summary here -->
-    <p>
-      <b>Hi!</b> Welcome to my blog.
-    </p>
-    <p>
-      This is where I will be posting write-ups about different projects that I am working on or have completed.
-
-      You can also check out my <a href="https://wycre.net">personal page</a> with some more information about me.
-    </p>
+    {@html config.longDescription}
   </div>
 
   <div class="posts">

@@ -50,12 +50,17 @@ Currently, this still requires some web skills to configure.
 You can head into [`src/lib/config.js`](./src/lib/config.js) for all instance-specific configuration,
 this relates to your URL and cohost tag, etc.
 
-This fork of the cohost-blogger has replaced several elements with generic versions, as well as placing comments that 
-will help in finding areas to change.
+This fork of the cohost-blogger intends to offer a more genericized version of the original. 
 
-Perform a search of this repo for the string `UPDATEME` to find all areas that you should change.
+In general:
+1. Ensure all values in [`src/lib/config.js`](./src/lib/config.js) are set to your liking
+2. Replace images in [`static`](./static) to your own.
 
-Additionally, the default homepage includes some tips on where to go to configure your page
+Advanced:
+- The homepage can be updated in [`src/routes/+page.svelte](./src/routes/+page.svelte)
+- The header and footer can be modified in [`src/routes/+layout.svelte](./src/routes/+layout.svelte)
+- The general layout of individual post pages can be modified in [`src/routes/\[post=slug\]/+page.svelte](./src/routes/[post=slug]/+page.svelte)
+
 
 ## Writing notes
 
