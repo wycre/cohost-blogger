@@ -1,5 +1,8 @@
 # cohost-blogger
 
+## Archived
+This repository has been archived due to the shutdown of cohost.org during Q4 2024.
+
 A self-hostable front-end for [Cohost](https://cohost.org/) mimicking a CMS.
 
 ## What?
